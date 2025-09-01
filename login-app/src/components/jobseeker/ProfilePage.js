@@ -21,7 +21,7 @@ const ProfilePage = ({ user, token, onProfileUpdate }) => {
     setIsLoading(true);
     setMessage('');
     try {
-      const response = await fetch('http://localhost:5000/api/profile', {
+      const response = await fetch('https://ai-job-platform-api.onrender.com/api/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

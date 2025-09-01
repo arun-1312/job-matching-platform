@@ -33,7 +33,7 @@ const CompanyProfilePage = ({ user, token, onProfileUpdate }) => {
                 industry: profileData.industry,
                 about_company: profileData.about_company
             };
-            const response = await fetch('http://localhost:5000/api/employer/update-profile', {
+            const response = await fetch('https://ai-job-platform-api.onrender.com/api/employer/update-profile', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

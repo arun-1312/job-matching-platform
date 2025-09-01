@@ -111,7 +111,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess, defaultRole = 'seeker' }) =
         };
 
     try {
-      const response = await fetch(`http://localhost:5000${endpoint}`, {
+      const response = await fetch(`https://ai-job-platform-api.onrender.com${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

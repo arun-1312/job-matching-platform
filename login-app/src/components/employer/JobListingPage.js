@@ -50,7 +50,7 @@ const JobListingPage = ({ token }) => {
       }
       try {
         setIsLoading(true);
-        const response = await fetch('http://localhost:5000/api/employer/jobs', {
+        const response = await fetch('https://ai-job-platform-api.onrender.com/api/employer/jobs', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
 
@@ -100,7 +100,7 @@ const JobListingPage = ({ token }) => {
         status: 'open',
         application_deadline: newJob.applicationDeadline ? newJob.applicationDeadline.toISOString() : null,
       };
-      const response = await fetch('http://localhost:5000/api/employer/jobs', {
+      const response = await fetch('https://ai-job-platform-api.onrender.com/api/employer/jobs', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -151,7 +151,7 @@ const JobListingPage = ({ token }) => {
         default:
           updatedStatus = 'open';
       }
-      const response = await fetch(`http://localhost:5000/api/employer/jobs/${jobId}`, {
+      const response = await fetch(`https://ai-job-platform-api.onrender.com/api/employer/jobs/${jobId}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -182,7 +182,7 @@ const JobListingPage = ({ token }) => {
 
   const handleDeleteJob = async (jobId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/employer/jobs/${jobId}`, {
+      const response = await fetch(`https://ai-job-platform-api.onrender.com/api/employer/jobs/${jobId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

@@ -117,7 +117,7 @@ const ResumeManagerPage = ({ token }) => {
     const fetchResumes = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch('http://localhost:5000/api/resumes', { headers: { 'Authorization': `Bearer ${token}` } });
+            const response = await fetch('https://ai-job-platform-api.onrender.com/api/resumes', { headers: { 'Authorization': `Bearer ${token}` } });
             const data = await response.json();
             if (Array.isArray(data)) {
                 setResumes(data);
@@ -152,19 +152,19 @@ const ResumeManagerPage = ({ token }) => {
         const formData = new FormData();
         formData.append('resumeName', data.resumeName);
         formData.append('file', data.file);
-        await fetch('http://localhost:5000/api/resumes/upload', { method: 'POST', headers: { 'Authorization': `Bearer ${token}` }, body: formData });
+        await fetch('https://ai-job-platform-api.onrender.com/api/resumes/upload', { method: 'POST', headers: { 'Authorization': `Bearer ${token}` }, body: formData });
     });
 
     const handleDelete = (resumeId) => performAction(async () => {
-        await fetch(`http://localhost:5000/api/resumes/${resumeId}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+        await fetch(`https://ai-job-platform-api.onrender.com/api/resumes/${resumeId}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
     });
 
     const handleSetDefault = (resumeId) => performAction(async () => {
-        await fetch(`http://localhost:5000/api/resumes/${resumeId}/default`, { method: 'PUT', headers: { 'Authorization': `Bearer ${token}` } });
+        await fetch(`https://ai-job-platform-api.onrender.com/api/resumes/${resumeId}/default`, { method: 'PUT', headers: { 'Authorization': `Bearer ${token}` } });
     });
 
     const handleRename = (data) => performAction(async () => {
-        await fetch(`http://localhost:5000/api/resumes/${modalState.resume.id}/rename`, {
+        await fetch(`https://ai-job-platform-api.onrender.com/api/resumes/${modalState.resume.id}/rename`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
             body: JSON.stringify({ newName: data.newName }),
