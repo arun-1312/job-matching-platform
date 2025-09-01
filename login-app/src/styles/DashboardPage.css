@@ -1,5 +1,23 @@
-.progress-ring__circle {
-  transition: stroke-dashoffset 0.8s ease-in-out;
-  transform: rotate(-90deg);
-  transform-origin: 50% 50%;
+/* Sidebar transition styles */
+.sidebar {
+    width: 4.5rem; /* 72px - collapsed state */
+    transition: width 0.2s ease-in-out;
+}
+.sidebar:hover {
+    width: 16rem; /* 256px - expanded state */
+}
+
+/* Custom scrollbar for a cleaner look in the sidebar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* Make the track invisible */
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #475569; /* A mid-range slate color */
+    border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #64748b; /* A lighter slate on hover */
 }
