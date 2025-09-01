@@ -4,7 +4,7 @@ import {
     LayoutDashboard, Search, Briefcase, User, FileText, BarChart2, 
     ClipboardCheck, Bookmark, MessageSquare, Settings, LogOut, 
     Bell, HelpCircle, Mail, ChevronRight, Home, Work, TrendingUp,
-    FileBadge, Calendar, Star, Download, Upload, Building, Eye
+    FileBadge, Calendar, Star, Download, Upload, Building, Eye, X
 } from 'lucide-react';
 import '../../styles/DashboardPage.css';
 import ProfilePage from './ProfilePage';
@@ -121,12 +121,43 @@ const NotificationsPanel = ({ isOpen }) => (
     </AnimatePresence>
 );
 
+// --- Notice Banner Component ---
+const NoticeBanner = ({ onCancel }) => (
+    <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: -20, opacity: 0 }}
+        className="bg-blue-50 border-b border-blue-200 p-4 flex items-center justify-between shadow-md z-40"
+    >
+        <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                <Building size={16} className="text-blue-600" />
+            </div>
+            <div>
+                <p className="text-sm font-medium text-gray-800">
+                    Notice: Platform Under Development
+                </p>
+                <p className="text-xs text-gray-600 mt-1">
+                    We sincerely apologize for the inconvenience. The core features of Zolabz AI Career Platform are still under development. However, you are welcome to explore most functionalities, including job applications and profile management. Thank you for your patience!
+                </p>
+            </div>
+        </div>
+        <button
+            onClick={onCancel}
+            className="text-gray-600 hover:text-gray-800 p-1 rounded-full hover:bg-gray-200 transition-colors"
+        >
+            <X size={16} />
+        </button>
+    </motion.div>
+);
+
 // --- Main Dashboard Component ---
 const DashboardPage = ({ user, token, onLogout, onProfileUpdate }) => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
     const [activePage, setActivePage] = useState('dashboard');
     const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
     const [isActivelySeeking, setIsActivelySeeking] = useState(true);
+    const [isNoticeVisible, setIsNoticeVisible] = useState(true); // State to control notice visibility
 
     const renderActivePage = () => {
         switch (activePage) {
@@ -321,7 +352,13 @@ const DashboardPage = ({ user, token, onLogout, onProfileUpdate }) => {
                     </div>
                 </header>
                 
-                <div className="flex-1 overflow-y-auto bg-gray-50">
+                <div className="flex-1 overflow-y-auto bg-gray-50 relative">
+                    {/* Notice Banner */}
+                    <AnimatePresence>
+                        {isNoticeVisible && (
+                            <NoticeBanner onCancel={() => setIsNoticeVisible(false)} />
+                        )}
+                    </AnimatePresence>
                     {renderActivePage()}
                     <NotificationsPanel isOpen={isNotificationsOpen} />
                 </div>
