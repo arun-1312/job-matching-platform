@@ -343,23 +343,27 @@ const SocialLinksSection = ({ data, isEditing, onChange }) => {
 
 // Experience Section Component
 const ExperienceSection = ({ data, isEditing, onChange }) => {
+  // Enhanced parseExperiences with fallback for null/undefined
   const parseExperiences = (expData) => {
+    if (expData == null) return []; // Handle null or undefined
     if (typeof expData === 'string') {
       try {
-        return JSON.parse(expData);
+        const parsed = JSON.parse(expData);
+        return Array.isArray(parsed) ? parsed : [];
       } catch (e) {
+        console.error('Experience parse error:', e);
         return [];
       }
     }
     return Array.isArray(expData) ? expData : [];
   };
 
-  const [experiences, setExperiences] = useState(parseExperiences(data?.experience));
+  const [experiences, setExperiences] = useState(parseExperiences(data?.experience ?? [])); // Use ?? for nullish coalescing
   const [editingId, setEditingId] = useState(null);
   const [tempExperience, setTempExperience] = useState({});
 
   useEffect(() => {
-    setExperiences(parseExperiences(data?.experience));
+    setExperiences(parseExperiences(data?.experience ?? [])); // Use ?? here
   }, [data]);
 
   const handleAddNew = () => {
@@ -384,7 +388,7 @@ const ExperienceSection = ({ data, isEditing, onChange }) => {
   const handleCancel = () => {
     const originalExperience = data?.experience?.find(exp => exp.id === editingId);
     if (!originalExperience) {
-        setExperiences(experiences.filter(exp => exp.id !== editingId));
+      setExperiences(experiences.filter(exp => exp.id !== editingId));
     }
     setEditingId(null);
   };
@@ -394,6 +398,7 @@ const ExperienceSection = ({ data, isEditing, onChange }) => {
     setExperiences(updatedExperiences);
     onChange('experience', { experience: updatedExperiences });
   };
+
   const handleTempChange = (e) => {
     setTempExperience({ ...tempExperience, [e.target.name]: e.target.value });
   };
