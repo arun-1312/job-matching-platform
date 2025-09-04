@@ -394,7 +394,6 @@ const ExperienceSection = ({ data, isEditing, onChange }) => {
     setExperiences(updatedExperiences);
     onChange('experience', { experience: updatedExperiences });
   };
-
   const handleTempChange = (e) => {
     setTempExperience({ ...tempExperience, [e.target.name]: e.target.value });
   };
