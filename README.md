@@ -14,14 +14,6 @@ Developed as part of an internship project and currently **incomplete**.
 
 ---
 
-##  Tech Stack
-
-- **Frontend:** React.js  
-- **Backend:** Node.js, Express.js  
-- **Database:** MongoDB / SQL  
-
----
-
 ##  Status
 
 - Core features partially working  
